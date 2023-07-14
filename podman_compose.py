@@ -855,9 +855,12 @@ def get_net_args(compose, cnt):
         is_ext = net_desc.get("external", None)
         ext_desc = is_ext if is_dict(is_ext) else {}
         default_net_name = net if is_ext else f"{proj_name}_{net}"
+        if_name = net_desc.get("interface", None)
         net_name = (
             ext_desc.get("name", None) or net_desc.get("name", None) or default_net_name
         )
+        if if_name:
+            net_name = f"{net_name}:interface_name={if_name}"
         net_names.append(net_name)
     net_names_str = ",".join(net_names)
 
