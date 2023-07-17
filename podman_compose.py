@@ -873,11 +873,14 @@ def get_net_args(compose, cnt):
             is_ext = net_desc.get("external", None)
             ext_desc = is_ext if is_dict(is_ext) else {}
             default_net_name = net_ if is_ext else f"{proj_name}_{net_}"
+            if_name = net_desc.get("interface", None)
             net_name = (
                 ext_desc.get("name", None)
                 or net_desc.get("name", None)
                 or default_net_name
             )
+            if if_name:
+                net_name = f"{net_name}:interface_name={if_name}"
 
             ipv4 = multiple_nets[net_].get("ipv4_address", None)
             ipv6 = multiple_nets[net_].get("ipv6_address", None)

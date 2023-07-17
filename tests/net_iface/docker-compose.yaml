@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  web:
+    image: busybox
+    command: httpd -f -p 8123 -h /etc/
+    networks:
+      - test
+
+networks:
+  test:
+    interface: int0
+    ipv4_address: "192.168.10.4"
